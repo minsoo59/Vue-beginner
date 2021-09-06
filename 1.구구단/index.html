@@ -1,0 +1,47 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Vue tutorial</title>
+  </head>
+  <body>
+    <div id="root">
+      <div>{{frist}} 곱하기 {{second}}는?</div>
+      <form action="" v-on:submit="onSubmitForm">
+        <input type="number" ref="answer" v-model="value" />
+        <button type="submit">value</button>
+      </form>
+      <div id="result">{{result}}</div>
+    </div>
+    <script>
+      const app = new Vue({
+        el: "#root",
+        data: {
+          // react의 경우 state 선언
+          frist: Math.ceil(Math.random() * 9),
+          second: Math.ceil(Math.random() * 9),
+          value: "",
+          result: "",
+        },
+        methods: {
+          onSubmitForm(e) {
+            e.preventDefault();
+            if (this.frist * this.second === parseInt(this.value)) {
+              this.result = "정답";
+              this.frist = Math.ceil(Math.random() * 9);
+              this.second = Math.ceil(Math.random() * 9);
+              this.value = "";
+              this.$ref.answer.focus();
+            } else {
+              this.result = "땡";
+              this.value = "";
+              this.$ref.answer.focus();
+            }
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

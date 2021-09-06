@@ -1,0 +1,57 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Work Relray</title>
+  </head>
+  <body>
+    <div id="root">
+      <word-relay start-word="민"></word-relay>
+      <word-relay start-word="수"></word-relay>
+    </div>
+    <script>
+      Vue.component("word-relay", {
+        template: `
+        <div>
+          <div>{{word}}</div>
+            <form v-on:submit="onSubmitForm">
+              <input type="text" ref="autoFocus" v-model="value" />
+              <button type="submit">value</button>
+            </form>
+          <div>{{result}}</div>
+        </div>
+          `,
+        props: ["startWord"],
+        data() {
+          return {
+            word: this.startWord,
+            result: "",
+            value: "",
+          };
+        },
+        methods: {
+          onSubmitForm(e) {
+            e.preventDefault();
+            if (this.word[this.word.length - 1] === this.value[0]) {
+              this.result = "ok";
+              this.word = this.value;
+              this.value = "";
+              this.$ref.autoFocus.focus();
+            } else {
+              this.result = "nope";
+              this.value = "";
+              this.$ref.autoFocus.focus();
+            }
+          },
+        },
+      });
+    </script>
+    <script>
+      const app = new Vue({
+        el: "#root",
+      });
+    </script>
+  </body>
+</html>
