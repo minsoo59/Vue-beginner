@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/minsoo59/Vue-beginner/issues"
   },
-  "homepage": "https://github.com/minsoo59/Vue-beginner#readme"
+  "homepage": "https://github.com/minsoo59/Vue-beginner#readme",
+  "dependencies": {
+    "vuex": "^3.6.2"
+  }
 }
