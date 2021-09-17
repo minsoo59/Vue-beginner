@@ -9,16 +9,29 @@
 
 <script>
 import { mapState } from "vuex";
-import store from "./store";
+import store, { INCREMENT_TIMER } from "./store";
 import TableComponent from "./TableComponent";
 import MineForm from "./MineForm";
+
+let interval;
 export default {
-  components: { TableComponent, MineForm },
   store,
+  components: { TableComponent, MineForm },
   computed: {
-    ...mapState(["timer", "result"]),
+    ...mapState(["timer", "result", "halted"]),
   },
   methods: {},
+  watch: {
+    halted(value, oldValue) {
+      if (value === false) {
+        interval = setInterval(() => {
+          this.$store.commit(INCREMENT_TIMER);
+        }, 1000);
+      } else {
+        clearInterval(interval);
+      }
+    },
+  },
 };
 </script>
 
